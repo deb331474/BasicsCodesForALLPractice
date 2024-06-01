@@ -1,0 +1,7 @@
+INFO    2024-02-29 20:51:49,595 [main] in.debasish.testCases.BaseTest  - Config properties loaded !!!
+INFO    2024-02-29 20:51:49,596 [main] in.debasish.testCases.BaseTest  - OR properties loaded !!!
+INFO    2024-02-29 20:51:52,467 [main] in.debasish.testCases.BaseTest  - Launching Chrome !!!
+INFO    2024-02-29 20:51:55,783 [main] in.debasish.testCases.BaseTest  - Navigated to : http://teststore.automationtesting.co.uk/
+INFO    2024-02-29 20:51:57,060 [main] in.debasish.testCases.BaseTest  - Clicked on the signIn link
+INFO    2024-02-29 20:51:58,876 [main] in.debasish.testCases.BaseTest  - Successfully logged into the application
+INFO    2024-02-29 20:52:05,770 [main] in.debasish.testCases.BaseTest  - Test Execution completed !!!

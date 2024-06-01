@@ -1,0 +1,196 @@
+package in.debasish.Streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+class Employee {
+
+	private String name;
+	private int age;
+	private String addrs;
+	private int empId;
+	private String empAdress;
+	private String company;
+
+	public Employee(String name, int age, String addrs, int empId, String empAddress, String company) {
+
+		this.name = name;
+		this.age = age;
+		this.addrs = addrs;
+		this.empId = empId;
+		this.company = company;
+
+		this.empAdress=empAddress;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getAddrs() {
+		return addrs;
+	}
+
+	public void setAddrs(String addrs) {
+		this.addrs = addrs;
+	}
+
+	public int getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
+
+	public String getEmpAdress() {
+		return empAdress;
+	}
+
+	public void setEmpAdress(String empAdress) {
+		this.empAdress = empAdress;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", age=" + age + ", addrs=" + addrs + ", empId=" + empId + ", empAdress="
+				+ empAdress + ", company=" + company + "]";
+	}
+
+}
+
+public class EmployeeStreamOperations {
+
+	public static void main(String[] args) {
+
+		List<Employee> employeeList = Arrays.asList(new Employee("Tom Jones", 45, "Laida", 1145, "Bangalore", "TCS"),
+				new Employee("Harry Major", 25, "Rangatikra", 2526, "Chennai", "Infosys"),
+				new Employee("Ethan Hardy", 10, "Baijapali", 2523, "Pune", "Capgemini"),
+				new Employee("Nancy Smith", 15, "Bhagipali", 2829, "Chennai", "TCS"),
+				new Employee("Deborah Sprightly", 29, "Sambalpur", 1273263, "Sambalpur", "IBM"),
+				new Employee("Deborah Sprightly", 29, "Sambalpur", 1273263, "Sambalpur", "IBM"));
+		
+
+		List<String> mappedList = employeeList.stream().map(emp -> emp.getName()).toList();
+		System.out.println(mappedList);
+
+		Predicate<Employee> p1 = s -> s.getAddrs().equals("Bhagipali");
+
+		boolean adressBg = employeeList.stream().allMatch(p1);
+
+		boolean adbg = employeeList.stream().anyMatch(p1);
+		System.out.println(adressBg);
+		System.out.println(adbg);
+
+		// 1-Filter Employee by age greater than 30
+
+		List<Employee> employeesAbove30 = employeeList.stream().filter(emp -> emp.getAge() >= 30)
+				.collect(Collectors.toList());
+		System.out.println(employeesAbove30);
+
+		// 2-Mapping all the employee names into upper case
+
+		List<String> allempNameUppr = employeeList.stream().map(em -> em.getName().toUpperCase()).toList();
+		System.out.println(allempNameUppr);
+
+		// 3-Finding employee who works in TCS
+
+		List<Employee> workTcs = employeeList.stream().filter(m -> m.getCompany().equals("TCS")).toList();
+
+		System.out.println(workTcs);
+
+		// 4-Finding youngest Employee among these
+
+		Employee youngestEmployee = employeeList.stream().min((emp1, emp2) -> emp1.getAge() - emp2.getAge())
+				.orElse(null);
+
+		System.out.println("Youngest employee: "+youngestEmployee);
+		
+		//6- Printing Employee Address
+		
+		employeeList.stream().map(Employee::getAddrs).forEach(System.out::println);
+		
+		//7- Printing age of all the employee
+		
+		employeeList.stream().map(Employee::getAge).forEach(System.out::println);
+		
+		//8-Finding all the employee in between age 30 and 60
+		
+		List<Employee> empbet30and60=employeeList.stream().filter(e->e.getAge()>=30 && e.getAge()<=60).collect(Collectors.toList());
+		
+		System.out.println("Employees aged between 30 and 60:"+empbet30and60);
+		
+		//9-Checking if all Employee Work in Chennai
+		
+		boolean allEmpworkinChennai = employeeList.stream().allMatch(e->e.getEmpAdress().equals("Chennai"));
+		
+		System.out.println(allEmpworkinChennai);
+		
+		//10-Finding sum of all the employee ids
+		
+		int sumofEmpids = employeeList.stream().mapToInt(Employee::getEmpId).sum();
+		System.out.println((int)sumofEmpids);
+		
+		
+		//11-Finding the first Employee working at TCS
+		
+		Optional<Employee> firstEmployeeAtTCS= employeeList.stream().filter(em->em.getCompany().equals("TCS")).findFirst();
+		
+		System.out.println("First employee working at TCS: " + firstEmployeeAtTCS.orElse(null));
+		
+		//12-Printing distinct company names
+		
+		List<String> distinctCompanies = employeeList.stream().map(Employee::getCompany).distinct().toList();
+		
+		System.out.println("Distinct company names: " + distinctCompanies);
+		
+		//12-Grouping employee by company
+		
+		Map<String,List<Employee>> employeeByCompany= employeeList.stream().collect(Collectors.groupingBy(Employee::getCompany));
+		
+		System.out.println("Employees grouped by company: " + employeeByCompany);
+		
+		//13-Count Employee by Age
+		
+		 Map<Integer, Long> employeeCountByAge=employeeList.stream().collect(Collectors.groupingBy(Employee::getAge,Collectors.counting()));
+		 
+		 System.out.println("Employee count by age: " + employeeCountByAge);
+		
+		 //14-calculating average age of all the employees
+		 
+		 double empAvgAge= employeeList.stream().mapToDouble(Employee::getAge).average().orElse(0.0);
+		 System.out.println(empAvgAge);
+		 
+		 //15-checking if any employee lives in Bangalore
+		 
+		List<Employee> l= employeeList.stream().filter(em->em.getAddrs().equals("Bangalore")).toList();
+		
+		System.out.println("Employee living in Bangalore:"+l);
+		
+	}
+
+}

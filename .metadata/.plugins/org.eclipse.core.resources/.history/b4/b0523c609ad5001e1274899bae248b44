@@ -1,0 +1,34 @@
+package in.debasish.copilotCoding;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+public class FindingmostRepeatedCharacterInString {
+	
+	public static void getMostRepeatedChainString(String input){
+		Map<Character,Integer> countMap=new HashMap<Character, Integer>();
+		
+		for(char c:input.toCharArray()) {
+			
+			if(c!=' ') {
+				countMap.put(c,countMap.getOrDefault(c, 0)+1);
+			}
+		}
+		
+		int maxFrequency=0;
+		for(int val:countMap.values()) {
+			if(val>maxFrequency) {
+				maxFrequency=val;
+			}
+		}
+		
+		for(Map.Entry<Character,Integer> hmap:countMap.entrySet()) {
+			if(hmap.getValue()==maxFrequency) {
+				System.out.println(hmap.getKey() + " = " + hmap.getValue());
+			}
+		}
+	}
+
+}

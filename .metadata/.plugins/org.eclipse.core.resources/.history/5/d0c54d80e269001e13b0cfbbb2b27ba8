@@ -1,0 +1,10 @@
+package in.debasish.programming;
+
+public class Largest2ndLargest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

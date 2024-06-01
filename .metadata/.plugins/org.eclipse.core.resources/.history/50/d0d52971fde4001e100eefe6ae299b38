@@ -1,0 +1,10 @@
+package in.debasish.java8Function;
+
+public class FunctionalInterfaceStaticMethod {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

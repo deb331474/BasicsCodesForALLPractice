@@ -1,0 +1,14 @@
+package in.debasish.java8Function;
+
+import java.util.function.Function;
+
+public class FunctionalInterfaceStaticMethod {
+
+	public static void main(String[] args) {
+
+		Function<String, String> f=Function.identity();
+		String s=f.apply("Debasish");
+		System.out.println(s);
+	}
+
+}

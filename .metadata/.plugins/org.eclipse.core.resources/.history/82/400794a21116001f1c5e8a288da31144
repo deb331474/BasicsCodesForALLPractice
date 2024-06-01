@@ -1,0 +1,154 @@
+package in.debasish.Streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Product {
+
+	private String name;
+	private double price;
+	private int productNumber;
+	private String category;
+	private String brand;
+	private int stockQuantity;
+	private String color;
+	private double weight;
+	private String dimensions;
+	private double rating;
+	private String supplier;
+
+	public Product(String name, double price, int productNumber, String category, String brand, int stockQuantity,
+			String color, double weight, String dimensions, double rating, String supplier) {
+		this.name = name;
+		this.price = price;
+		this.productNumber = productNumber;
+		this.category = category;
+		this.brand = brand;
+		this.stockQuantity = stockQuantity;
+		this.color = color;
+		this.weight = weight;
+		this.dimensions = dimensions;
+		this.rating = rating;
+		this.supplier = supplier;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getProductNumber() {
+		return productNumber;
+	}
+
+	public void setProductNumber(int productNumber) {
+		this.productNumber = productNumber;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public int getStockQuantity() {
+		return stockQuantity;
+	}
+
+	public void setStockQuantity(int stockQuantity) {
+		this.stockQuantity = stockQuantity;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
+	public String getDimensions() {
+		return dimensions;
+	}
+
+	public void setDimensions(String dimensions) {
+		this.dimensions = dimensions;
+	}
+
+	public double getRating() {
+		return rating;
+	}
+
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+
+	public String getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(String supplier) {
+		this.supplier = supplier;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [name=" + name + ", price=" + price + ", productNumber=" + productNumber + ", category="
+				+ category + ", brand=" + brand + ", stockQuantity=" + stockQuantity + ", color=" + color + ", weight="
+				+ weight + ", dimensions=" + dimensions + ", rating=" + rating + ", supplier=" + supplier + "]";
+	}
+
+	public static void main(String[] args) {
+
+		List<Product> productList = Arrays.asList(
+				new Product("Laptop", 1200.00, 101, "Electronics", "Dell", 50, "Silver", 2.5, "15x10x1 inches", 4.5,
+						"TechSupplier"),
+				new Product("Smartphone", 800.00, 102, "Electronics", "Samsung", 200, "Black", 0.3, "6x3x0.3 inches",
+						4.7, "PhoneDepot"),
+				new Product("Tablet", 300.00, 103, "Electronics", "Apple", 150, "White", 0.5, "9x6x0.4 inches", 4.6,
+						"GadgetWorld"),
+				new Product("TV", 1500.00, 104, "Electronics", "Sony", 30, "Black", 10.0, "50x30x5 inches", 4.8,
+						"HomeElectronics"),
+				new Product("Headphones", 200.00, 105, "Accessories", "Bose", 300, "Black", 0.2, "8x6x2 inches", 4.4,
+						"SoundExperts"),
+				new Product("Shoes", 100.00, 106, "Footwear", "Nike", 500, "Red", 1.0, "12x8x5 inches", 4.2,
+						"SportsGear"));
+
+		// 1-Filter products by stock quantity greater than 100
+
+		List<Product> highStockProducts = productList.stream().filter(prod -> prod.getStockQuantity() >= 100)
+				.collect(Collectors.toList());
+		System.out.println("Products with stock quantity greater than 100: " + highStockProducts);
+	}
+
+}
